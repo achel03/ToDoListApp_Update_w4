@@ -18,11 +18,11 @@ public class TodoUtil {
 		
 		title = sc.next();
 		if (list.isDuplicate(title)) {
-			System.out.printf("title can't be duplicate");
+			System.out.printf("title can't be duplicate!!!");
 			return;
 		}
 		
-		System.out.println("enter the description");
+		System.out.println("enter the description!!!");
 		desc = sc.next();
 		
 		TodoItem t = new TodoItem(title, desc);
