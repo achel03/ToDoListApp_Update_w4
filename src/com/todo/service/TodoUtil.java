@@ -1,5 +1,11 @@
 package com.todo.service;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.*;
 
 import com.todo.dao.TodoItem;
@@ -29,16 +35,15 @@ public class TodoUtil {
 		TodoItem t = new TodoItem(title, desc);
 		list.addItem(t);
 	}
-
 	public static void deleteItem(TodoList l) {
 		
 		Scanner sc = new Scanner(System.in);
-		String title = sc.next();
 		
 		System.out.print("\n"
 				+ "=============== Delete Item Section ==============\n"
 				+ ">>> 삭제할 할 일의 이름을 입력해주세요 : \n"
 				+ "\n");
+		String title = sc.next();
 		
 		for (TodoItem item : l.getList()) {
 			if (title.equals(item.getTitle())) {
@@ -46,7 +51,6 @@ public class TodoUtil {
 				break;
 			}
 		}
-		sc.close();
 	}
 
 
@@ -99,5 +103,37 @@ public class TodoUtil {
         System.out.println();
         System.out.println();
         System.out.println();
+	}
+	
+	public static void fileWriter(TodoList l) {
+		try {
+			Writer w = new FileWriter("todolist.txt");
+			for (TodoItem item : l.getList()) {
+				w.write(item.toSaveString());
+			}
+			System.out.println("항목들이 저장되었습니다 :)");
+			w.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public static void BuffReader(TodoList list) {
+		try {
+			BufferedReader r = new BufferedReader(new FileReader("todolist.txt"));
+			String oneline;
+			while((oneline=r.readLine())!=null) {
+				StringTokenizer st = new StringTokenizer(oneline,"##"); 
+				String tit = st.nextToken();
+				String des = st.nextToken();
+				TodoItem t = new TodoItem(tit, des);
+				list.addItem(t);
+			}
+			System.out.println("항목들을 가져왔습니다 :)");
+			r.close();
+		}catch(FileNotFoundException e) {
+			e.printStackTrace();
+		}catch (IOException e) {
+			e.printStackTrace();
+		} 
 	}
 }

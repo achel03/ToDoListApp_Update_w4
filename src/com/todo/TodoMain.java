@@ -14,6 +14,7 @@ public class TodoMain {
 		TodoList l = new TodoList();
 		boolean isList = false;
 		boolean quit = false;
+		TodoUtil.BuffReader(l);
 		do {
 			Menu.prompt();
 			isList = false;
@@ -58,6 +59,7 @@ public class TodoMain {
 
 			case "exit":
 				quit = true;
+				TodoUtil.fileWriter(l);
 				break;
 
 			default:
