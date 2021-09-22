@@ -4,14 +4,23 @@ public class Menu {
     public static void displaymenu()
     {
         System.out.println();
-        System.out.println("1. Add a new item ( add )");
-        System.out.println("2. Delete an existing item ( del )");
-        System.out.println("3. Update an item  ( edit )");
-        System.out.println("4. List all items ( ls )");
-        System.out.println("5. sort the list by name ( ls_name_asc )");
-        System.out.println("6. sort the list by name ( ls_name_desc )");
-        System.out.println("7. sort the list by date ( ls_date )");
-        System.out.println("8. exit (Or press escape key to exit)");
-        System.out.println("Enter your choice >");
+        System.out.println(".-------------------COMMAND MENU------------------.");
+        System.out.println("|$*#*&*$*#*&*$*#*&*$*#*&*$*#*&*$*#*&*$*#*&*$*#*&*$|");
+        System.out.println(".-------------------------------------------------.");
+        System.out.println("|	1. 새로운 항목 추가 ( 명령어: add )		  |");
+        System.out.println("|	2. 하나의 항목 삭제 ( 명령어: del )		  |");
+        System.out.println("|	3. 하나의 항목 수정 ( 명령어: edit )     	  |");
+        System.out.println("|	4. 저장된 모든 항목 출력 ( 명령어: ls )  	  |");
+        System.out.println("|	5. 이름 순 항목 정렬 ( 명령어: ls_name_asc )	  |");
+        System.out.println("|	6. 이름 순 항목 정렬 ( 명령어: ls_name_desc )	  |");
+        System.out.println("|	7. 날짜 순 항목 정렬 ( 명령어: ls_date )	  |");
+        System.out.println("|	8. 프로그램 종료 ( ESC key OR 명령어: exit )	  |");
+        System.out.println(".-------------------------------------------------.");
+        System.out.println();
     }
+
+	public static void prompt() {
+		System.out.print(">>> 명령어를 입력해주세요 (메뉴를 보시려면 \'help\'를 입력해주세요) : ");
+		
+	}
 }

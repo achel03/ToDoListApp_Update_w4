@@ -15,11 +15,15 @@ public class TodoMain {
 		boolean isList = false;
 		boolean quit = false;
 		do {
-			Menu.displaymenu();
+			Menu.prompt();
 			isList = false;
 			String choice = sc.next();
 			switch (choice) {
-
+			
+			case "help":
+				Menu.displaymenu();
+				break;
+				
 			case "add":
 				TodoUtil.createItem(l);
 				break;
@@ -57,11 +61,12 @@ public class TodoMain {
 				break;
 
 			default:
-				System.out.println("please enter one of the above mentioned command");
+				System.out.println("위의 항목 중 원하는 명령어 하나를 입력해주세요!~");
 				break;
 			}
 			
 			if(isList) l.listAll();
 		} while (!quit);
+	sc.close();
 	}
 }

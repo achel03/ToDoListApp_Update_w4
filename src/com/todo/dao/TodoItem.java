@@ -6,6 +6,7 @@ public class TodoItem {
     private String title;
     private String desc;
     private Date current_date;
+    private String curd;
 
 
     public TodoItem(String title, String desc){
@@ -36,5 +37,8 @@ public class TodoItem {
 
     public void setCurrent_date(Date current_date) {
         this.current_date = current_date;
+    }
+    public String toSaveString() {
+    	return title+"##"+desc+"##"+current_date+"\n";
     }
 }
