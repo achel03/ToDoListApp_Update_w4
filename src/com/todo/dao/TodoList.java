@@ -42,7 +42,17 @@ public class TodoList {
 			System.out.println(myitem.getTitle() + myitem.getDesc());
 		}
 	}
-	
+	public void find(String keyword){ // equals 사용해서 같은 값을 가지면 반환해
+		
+		for (TodoItem item : list) {
+//			if (keyword.equals(item.getTitle())||keyword.equals(item.getCategory())||keyword.equals(item.getDesc())) {
+//				System.out.println("|"+". [ " + item.getCategory()+" ] "+ item.getTitle() + " | " + item.getDesc()+" Time: "+item.getCurrent_date()+" - "+item.getDue_date());
+//			}
+			if (item.getCategory().contains(keyword)||item.getTitle().contains(keyword)||item.getDesc().contains(keyword)) {
+				System.out.println("|"+". [ " + item.getCategory()+" ] "+ item.getTitle() + " | " + item.getDesc()+" Time: "+item.getCurrent_date()+" - "+item.getDue_date());
+			}
+		}
+	}
 	public void listOne(int index) {
 		System.out.println((index+1)+". [ "+list.get(index).getCategory()+" ] "+ list.get(index).getTitle() + " | " + list.get(index).getDesc()+" Time: "+list.get(index).getCurrent_date()+" - "+list.get(index).getDue_date());
 		

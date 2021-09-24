@@ -18,7 +18,7 @@ public class TodoMain {
 		do {
 			Menu.prompt();
 			isList = false;
-			String choice = sc.next();
+			String choice = sc.nextLine();
 			switch (choice) {
 			
 			case "help":
@@ -60,11 +60,8 @@ public class TodoMain {
 				break;
 				
 			case "ls_date_desc":
-//				l.sortByDateDesc();
-				isList = true;
-				break;
 				
-			case "find":
+				isList = true;
 				break;
 				
 			case "exit":
@@ -73,8 +70,16 @@ public class TodoMain {
 				break;
 
 			default:
-				System.out.println("위의 항목 중 원하는 명령어 하나를 입력해주세요!~");
+				if(choice.contains("find")) {
+					String keyword = choice.replace("find", " ").trim();
+					l.find(keyword);
+				}
 				break;
+//					else {
+//					System.out.println("위의 항목 중 원하는 명령어 하나를 입력해주세요!~");
+//					break;
+//				}
+				
 			}
 			
 			if(isList) l.listAll();
