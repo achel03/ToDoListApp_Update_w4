@@ -121,17 +121,21 @@ public class TodoUtil {
 		try {
 			BufferedReader r = new BufferedReader(new FileReader("todolist.txt"));
 			String oneline;
+			int count = 0;
 			while((oneline=r.readLine())!=null) {
 				StringTokenizer st = new StringTokenizer(oneline,"##"); 
 				String tit = st.nextToken();
 				String des = st.nextToken();
+				String cur_d = st.nextToken();
 				TodoItem t = new TodoItem(tit, des);
+				t.setCurrent_date(cur_d);
 				list.addItem(t);
+				count++;
 			}
-			System.out.println("항목들을 가져왔습니다 :)");
+			System.out.println(count+"개의 항목들을 가져왔습니다 :)");
 			r.close();
 		}catch(FileNotFoundException e) {
-			e.printStackTrace();
+			System.out.println("todolist.txt 파일이 없습니다.");
 		}catch (IOException e) {
 			e.printStackTrace();
 		} 
