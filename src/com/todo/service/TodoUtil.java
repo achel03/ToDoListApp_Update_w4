@@ -75,7 +75,6 @@ public class TodoUtil {
 		sc.nextLine(); // 개행 문자 제거
 		System.out.print(">>> 할 일의 카테고리를 입력해주세요 : ");
 		String new_category = sc.next();
-		sc.nextLine();
 
 		System.out.print(">>> 새로운 할 일의 이름을 입력해주세요 : ");
 		String new_title = sc.next().trim();
@@ -83,10 +82,10 @@ public class TodoUtil {
 			System.out.println("ERROR: 이미 존재하는 항목의 이름입니다!!!");
 			return;
 		}
-		
+		sc.nextLine();
 		System.out.print(">>> 새로운 할 일의 내용을 입력해주세요 : ");
 		String new_description = sc.nextLine().trim();
-		l.deleteItem(check);
+		l.deleteItem(check-1);
 		
 		System.out.print(">>> 새로운 할 일의 마감일자를 입력해주세요 : ");
 		String new_due = sc.nextLine();
