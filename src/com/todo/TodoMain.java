@@ -43,12 +43,14 @@ public class TodoMain {
 
 			case "ls_name_asc":
 				l.sortByName();
+				System.out.println("제목순으로 정렬하였습니다.");
 				isList = true;
 				break;
 
 			case "ls_name_desc":
 				l.sortByName();
 				l.reverseList();
+				System.out.println("제목역순으로 정렬하였습니다.");
 				isList = true;
 				break;
 				
@@ -56,7 +58,15 @@ public class TodoMain {
 				l.sortByDate();
 				isList = true;
 				break;
-
+				
+			case "ls_date_desc":
+//				l.sortByDateDesc();
+				isList = true;
+				break;
+				
+			case "find":
+				break;
+				
 			case "exit":
 				quit = true;
 				TodoUtil.fileWriter(l);

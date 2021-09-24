@@ -15,13 +15,16 @@ public class TodoUtil {
 	
 	public static void createItem(TodoList list) {
 		
-		String title, desc;
+		String title, desc, category,due;
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("\n"
 				+ "=============== Create item Section ==============\n");
-		System.out.print(">>> 할 일의 이름을 입력해주세요 : ");
+		System.out.print(">>> 할 일의 카테고리를 입력해주세요 : ");
+		category = sc.next();
+		sc.nextLine();
 		
+		System.out.print(">>> 할 일의 이름을 입력해주세요 : ");
 		title = sc.next();
 		sc.nextLine(); // 개행 문자 제거
 		if (list.isDuplicate(title)) {
@@ -31,8 +34,12 @@ public class TodoUtil {
 		
 		System.out.print(">>> 할 일의 내용을 입력해주세요 : ");
 		desc = sc.nextLine();
+		
+		System.out.print(">>> 할 일의 마감일자를 입력해주세요 : ");
+		due = sc.nextLine();
+		
 		System.out.println("항목이 추가되었습니다 :)");
-		TodoItem t = new TodoItem(title, desc);
+		TodoItem t = new TodoItem(category, title, desc, due);
 		list.addItem(t);
 	}
 	public static void deleteItem(TodoList l) {
@@ -41,16 +48,17 @@ public class TodoUtil {
 		
 		System.out.print("\n"
 				+ "=============== Delete Item Section ==============\n"
-				+ ">>> 삭제할 할 일의 이름을 입력해주세요 : \n"
+				+ ">>> 삭제할 할 일의 번호를 입력해주세요 : \n"
 				+ "\n");
-		String title = sc.next();
-		
-		for (TodoItem item : l.getList()) {
-			if (title.equals(item.getTitle())) {
-				l.deleteItem(item);
-				break;
-			}
+		int check = sc.nextInt();
+		l.listOne(check-1);
+		System.out.print("위 항목을 삭제하시겠습니까?(y/n)");
+		char rg = sc.next().charAt(0);
+		if(rg=='y') {
+			l.deleteItem(check-1);	
+			System.out.println("삭제되었습니다 :)");
 		}
+		
 	}
 
 
@@ -60,46 +68,53 @@ public class TodoUtil {
 		
 		System.out.print("\n"
 				+ "=============== Edit Item Section ==============\n"
-				+ ">>> 수정하고 싶은 할 일의 이름을 입력해주세요 : \n"
+				+ ">>> 수정하고 싶은 할 일의 번호를 입력해주세요 : \n"
 				+ "\n");
-		String title = sc.next().trim();
+		int check = sc.nextInt();
+		l.listOne(check-1);
 		sc.nextLine(); // 개행 문자 제거
-		if (!l.isDuplicate(title)) {
-			System.out.println("ERROR: 해당 항목은 존재하지 않습니다!!!");
-			return;
-		}
+		System.out.print(">>> 할 일의 카테고리를 입력해주세요 : ");
+		String new_category = sc.next();
+		sc.nextLine();
 
 		System.out.print(">>> 새로운 할 일의 이름을 입력해주세요 : ");
-		String new_title = sc.nextLine().trim();
+		String new_title = sc.next().trim();
 		if (l.isDuplicate(new_title)) {
 			System.out.println("ERROR: 이미 존재하는 항목의 이름입니다!!!");
 			return;
 		}
 		
 		System.out.print(">>> 새로운 할 일의 내용을 입력해주세요 : ");
-		String new_description = sc.next().trim();
-		for (TodoItem item : l.getList()) {
-			if (item.getTitle().equals(title)) {
-				l.deleteItem(item);
-				TodoItem t = new TodoItem(new_title, new_description);
-				l.addItem(t);
-				System.out.println("항목이 수정되었습니다 :)");
-			}
-		}
+		String new_description = sc.nextLine().trim();
+		l.deleteItem(check);
+		
+		System.out.print(">>> 새로운 할 일의 마감일자를 입력해주세요 : ");
+		String new_due = sc.nextLine();
+		
+		TodoItem t = new TodoItem(new_category, new_title, new_description, new_due);
+		l.addItem(t, check-1);
+		System.out.println("항목이 수정되었습니다 :)");
 
 	}
 
 	public static void listAll(TodoList l) {
 		System.out.println();
-		System.out.println(".====================TODOLIST=====================.");
-        System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
-        System.out.println("|                                                 |");
+		int count = 0;
+		int i=1;
 		for (TodoItem item : l.getList()) {
-			System.out.println("|	[ TODO: " + item.getTitle() + "] " + item.getDesc());
+			count++;
 		}
-		System.out.println("|                                                 |");
-		System.out.println("|.................................................|");
-        System.out.println(".=================================================.");
+		System.out.println(".=========================TODOLIST====================================.");
+		System.out.println("|                  	전체목록, 총 "+count+"개			              |");
+        System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
+        System.out.println("|                                                                     |");
+		for (TodoItem item : l.getList()) {
+			System.out.println("|"+i+". [ " + item.getCategory()+" ] "+ item.getTitle() + " | " + item.getDesc()+" Time: "+item.getCurrent_date()+" - "+item.getDue_date());
+			i++;
+		}
+		System.out.println("|                                                                     |");
+		System.out.println("|.....................................................................|");
+        System.out.println(".=====================================================================.");
         System.out.println();
         System.out.println();
         System.out.println();
@@ -124,10 +139,12 @@ public class TodoUtil {
 			int count = 0;
 			while((oneline=r.readLine())!=null) {
 				StringTokenizer st = new StringTokenizer(oneline,"##"); 
+				String cat = st.nextToken();
 				String tit = st.nextToken();
 				String des = st.nextToken();
 				String cur_d = st.nextToken();
-				TodoItem t = new TodoItem(tit, des);
+				String due = st.nextToken();
+				TodoItem t = new TodoItem(cat, tit, des, due);
 				t.setCurrent_date(cur_d);
 				list.addItem(t);
 				count++;
@@ -139,5 +156,10 @@ public class TodoUtil {
 		}catch (IOException e) {
 			e.printStackTrace();
 		} 
+	}
+	
+	public static boolean isExistCategory(List<String> clist, String cate) {
+		for(String c: clist) if (c.equals(cate)) return true;
+		return false;
 	}
 }

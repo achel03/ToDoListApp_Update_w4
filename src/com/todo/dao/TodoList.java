@@ -16,8 +16,8 @@ public class TodoList {
 		list.add(t);
 	}
 
-	public void deleteItem(TodoItem t) {
-		list.remove(t);
+	public void deleteItem(int check) {
+		list.remove(check);
 	}
 
 	void editItem(TodoItem t, TodoItem updated) {
@@ -43,6 +43,11 @@ public class TodoList {
 		}
 	}
 	
+	public void listOne(int index) {
+		System.out.println((index+1)+". [ "+list.get(index).getCategory()+" ] "+ list.get(index).getTitle() + " | " + list.get(index).getDesc()+" Time: "+list.get(index).getCurrent_date()+" - "+list.get(index).getDue_date());
+		
+	}
+	
 	public void reverseList() {
 		Collections.reverse(list);
 	}
@@ -61,4 +66,9 @@ public class TodoList {
 		}
 		return false;
 	}
+
+	public void addItem(TodoItem t, int check) {
+		list.add(check, t);
+	}
+
 }

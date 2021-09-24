@@ -15,6 +15,7 @@ public class Menu {
         System.out.println("|	6. 이름 순 항목 정렬 ( 명령어: ls_name_desc )	  |");
         System.out.println("|	7. 날짜 순 항목 정렬 ( 명령어: ls_date )	  |");
         System.out.println("|	8. 프로그램 종료 ( ESC key OR 명령어: exit )	  |");
+        System.out.println("|	9. 키워드로 검색 ( 명령어: find <키워드> )	  |");
         System.out.println(".-------------------------------------------------.");
         System.out.println();
     }
