@@ -49,7 +49,10 @@ public class TodoList {
 		}
 	}
 	public void listCate() {
-		HashSet<TodoItem> li = new HashSet<TodoItem>(list);
+		HashSet<String> li = new HashSet<String>();
+		for (TodoItem myitem : list) {
+			li.add((String)(myitem.getCategory()));
+		}
 		System.out.println(li);
 	}
 	public void find(String keyword){ // equals 사용해서 같은 값을 가지면 반환해
