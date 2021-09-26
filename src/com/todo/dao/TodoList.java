@@ -3,6 +3,7 @@ package com.todo.dao;
 import java.util.*;
 
 import com.todo.service.TodoSortByDate;
+import com.todo.service.TodoSortByDateDesc;
 import com.todo.service.TodoSortByName;
 
 public class TodoList {
@@ -34,6 +35,11 @@ public class TodoList {
 		Collections.sort(list, new TodoSortByName());
 
 	}
+	
+	public void sortByDateDesc() {
+		Collections.sort(list, new TodoSortByDateDesc());
+
+	}
 
 	public void listAll() {
 		System.out.println("\n"
@@ -42,13 +48,27 @@ public class TodoList {
 			System.out.println(myitem.getTitle() + myitem.getDesc());
 		}
 	}
+	public void listCate() {
+		HashSet<TodoItem> li = new HashSet<TodoItem>(list);
+		
+		for (TodoItem myitem : li) {
+			System.out.println(myitem.getCategory()+" ");
+		}
+	}
 	public void find(String keyword){ // equals 사용해서 같은 값을 가지면 반환해
 		
 		for (TodoItem item : list) {
 //			if (keyword.equals(item.getTitle())||keyword.equals(item.getCategory())||keyword.equals(item.getDesc())) {
 //				System.out.println("|"+". [ " + item.getCategory()+" ] "+ item.getTitle() + " | " + item.getDesc()+" Time: "+item.getCurrent_date()+" - "+item.getDue_date());
 //			}
-			if (item.getCategory().contains(keyword)||item.getTitle().contains(keyword)||item.getDesc().contains(keyword)) {
+			if (item.getTitle().contains(keyword)||item.getDesc().contains(keyword)) {
+				System.out.println("|"+". [ " + item.getCategory()+" ] "+ item.getTitle() + " | " + item.getDesc()+" Time: "+item.getCurrent_date()+" - "+item.getDue_date());
+			}
+		}
+	}
+	public void find_cate(String keyword) {
+		for (TodoItem item : list) {
+			if(item.getCategory().contains(keyword)) {
 				System.out.println("|"+". [ " + item.getCategory()+" ] "+ item.getTitle() + " | " + item.getDesc()+" Time: "+item.getCurrent_date()+" - "+item.getDue_date());
 			}
 		}

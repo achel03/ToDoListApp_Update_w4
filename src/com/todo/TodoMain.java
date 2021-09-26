@@ -60,7 +60,12 @@ public class TodoMain {
 				break;
 				
 			case "ls_date_desc":
+				l.sortByDateDesc();
+				isList = true;
+				break;
 				
+			case "ls_cate":
+				l.listCate();
 				isList = true;
 				break;
 				
@@ -70,7 +75,10 @@ public class TodoMain {
 				break;
 
 			default:
-				if(choice.contains("find")) {
+				if(choice.contains("find_cate")) {
+					String keyword = choice.replace("find_cate", " ").trim();
+					l.find_cate(keyword);
+				}else if(choice.contains("find")) {
 					String keyword = choice.replace("find", " ").trim();
 					l.find(keyword);
 				}
