@@ -50,15 +50,12 @@ public class TodoList {
 	}
 	public void listCate() {
 		HashSet<TodoItem> li = new HashSet<TodoItem>(list);
-		
-		for (TodoItem myitem : li) {
-			System.out.println(myitem.getCategory()+" ");
-		}
+		System.out.println(li);
 	}
 	public void find(String keyword){ // equals 사용해서 같은 값을 가지면 반환해
 		
 		for (TodoItem item : list) {
-//			if (keyword.equals(item.getTitle())||keyword.equals(item.getCategory())||keyword.equals(item.getDesc())) {
+//			if (keyword.equals(item.getTitle())||keyword.equals(item.getDesc())) {
 //				System.out.println("|"+". [ " + item.getCategory()+" ] "+ item.getTitle() + " | " + item.getDesc()+" Time: "+item.getCurrent_date()+" - "+item.getDue_date());
 //			}
 			if (item.getTitle().contains(keyword)||item.getDesc().contains(keyword)) {
