@@ -43,7 +43,7 @@ public class TodoMain {
 
 			case "ls_name_asc":
 				l.sortByName();
-				System.out.println("제목순으로 정렬하였습니다.");
+				System.out.println("제목순으로 정렬하였습니다..");
 				isList = true;
 				break;
 
